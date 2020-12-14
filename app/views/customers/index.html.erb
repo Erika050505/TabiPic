@@ -11,12 +11,23 @@
   
 </div>
 
+<% if @post.liked_by?(current_customer) %>
 <li>
-  <i class="fa fa-comment"></i>
-  <a href="#comments"><%= @image.comments.count %></a>
+  <%= link_to post_like_path(@post), method: :delete do %>
+    <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+    <%= @post.likes.count %>
+  <% end %>
 </li>
-
-<div class="comment-list bt style-2" id="comments">
-  <div class="float-wrapper">
-    <h2 class="comment-count"><%= @image.comments.count %>件コメント</h2>
-  </div>
+<% else %>
+<li>
+  <%= link_to post_likes_path(@post), method: :post do %>
+    <i class="fa fa-heart-o" aria-hidden="true"></i>
+    <%= @post.likes.count %>
+  <% end %>
+</li>
+<% end %>
+<li>
+  <i class="fa fa-comment">
+    <%= link_to "#{@customer.comments.count} コメント", root_path %>
+  </i>
+</li>
