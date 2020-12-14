@@ -1,0 +1,22 @@
+<div class="profile-container">
+  <div class="Title">
+      <h2>My page</h2>
+  </div>
+  <%= attachment_image_tag @customer, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+  <%= @customer.name %>
+  <%= @customer.user_name %>
+  <% if @customer.id == current_customer.id %>
+    <p><%= link_to "プロフィール編集", edit_customer_path(@customer), class: "pull-right" %></p>
+  <% end %>
+  
+</div>
+
+<li>
+  <i class="fa fa-comment"></i>
+  <a href="#comments"><%= @image.comments.count %></a>
+</li>
+
+<div class="comment-list bt style-2" id="comments">
+  <div class="float-wrapper">
+    <h2 class="comment-count"><%= @image.comments.count %>件コメント</h2>
+  </div>

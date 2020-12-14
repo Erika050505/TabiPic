@@ -1,0 +1,30 @@
+<div class="page-header">
+  <div class="container">
+      <span class="logo-image"><%= link_to image_tag("logo1.jpeg", style: "width: 400px; height: 85px;"), root_path %> </span>
+      <div class="search-form">
+          <%= form_with url: search_path, method: :get, local: true do |f| %>
+            <%= f.text_field :content %>
+            <%= f.submit '検索' %>
+          <% end %>
+      </div>
+       
+       <ul class="nav navbar-nav navbar-right">
+
+        <% if customer_signed_in? %>
+        <!--顧客がログインしている場合-->
+          <li><%= link_to '', root_path, class: "glyphicon glyphicon-home icon", style: "font-size: 25px" %></li>
+          <li><%= link_to '', about_path, class: "glyphicon glyphicon-info-sign icon", style: "font-size: 25px" %></li>
+          <li><%= link_to '', new_post_path, class: "glyphicon glyphicon-plus-sign icon", style: "font-size: 25px" %></li>
+          <li><%= link_to '', customers_path, class: "glyphicon glyphicon-user icon", style: "font-size: 25px" %></li>
+          <li><%= link_to '', destroy_customer_session_path, method: :delete, class: "glyphicon glyphicon-log-out icon", style: "font-size: 25px" %></li>
+        <% else %>
+        <!--ログインしていない場合-->
+          <li><%= link_to '', root_path, class: "glyphicon glyphicon-home icon", style: "font-size: 25px" %></li>
+          <li><%= link_to '', about_path, class: "glyphicon glyphicon-info-sign icon", style: "font-size: 25px" %></li>
+          <li><%= link_to '', new_customer_registration_path, class: "glyphicon glyphicon-file icon", style: "font-size: 25px" %></li>
+          <li><%= link_to '', new_customer_session_path, class: "glyphicon glyphicon-log-in icon", style: "font-size: 25px" %></li>
+
+        <% end %>
+      </ul>
+  </div>
+</div>

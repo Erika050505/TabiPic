@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="title">
+        <h2>新規登録</h2>
+      </div>
+      <br>
+      <%= form_with model: @customer , url: customer_registration_path, local: true do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      　<div class="field col-xs-12">
+        　<div class="form-group has-icon">
+            <div class="customer-edit-image">
+              <%= attachment_image_tag @customer, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%>
+            </div>
+            <label class="control-label sr-only" for="inputEmail">ProfileImage</label>
+            <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+          </div>
+         </div> 
+        <div class="field col-xs-12">
+          <%= f.label :名前, class:"col-xs-2" %>
+          <%= f.text_field :name, autofocus: true, class:"col-xs-2" %><br>
+        </div>
+
+        <div class="field col-xs-12">
+          <%= f.label :ユーザーネーム, class:"col-xs-2" %>
+          <%= f.text_field :user_name, autofocus: true , class:"col-xs-2" %>
+        </div>
+
+        <div class="field col-xs-12">
+          <%= f.label :メール, class:"col-xs-3" %>
+          <%= f.text_field :email, autofocus: true %>
+        </div>
+
+        <div class="field col-xs-12">
+          <%= f.label :"電話番号(ハイフン無し)" , class:"col-xs-3"%>
+          <%= f.text_field :phone_number, autofocus: true %>
+        </div>
+
+        <div class="field col-xs-12">
+          <%= f.label :"パスワード" , class:"col-xs-3"%>
+          <% if @minimum_password_length %>
+          (<%= @minimum_password_length %> 文字以上)
+          <% end %>
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+
+        <div class="field col-xs-12">
+          <%= f.label :"パスワード(確認用)", class:"col-xs-3" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+　　  　<br>
+　　  　<div class="field col-xs-12">
+        <div class="actions">
+          <%= f.submit "新規登録",class: 'btn btn-success btn-lg col-xs-offset-4 col-xs-3' %>
+        </div>
+        </div>
+      <% end %>
+
+        <h3>既に登録済みの方</h3>
+        <p class="col-xs-offset-1"><%= link_to "こちら", new_customer_session_path %>からログインしてください。</p>
+
+    </div>
+  </div>
+</div>
