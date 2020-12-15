@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_14_103008) do
+ActiveRecord::Schema.define(version: 2020_12_15_113709) do
 
   create_table "areas", force: :cascade do |t|
     t.string "continent"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2020_12_14_103008) do
     t.string "sentence"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "area_id"
+    t.string "tag_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -77,10 +79,9 @@ ActiveRecord::Schema.define(version: 2020_12_14_103008) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer "taggings_count", default: 0
-    t.index ["name"], name: "index_tags_on_name", unique: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

@@ -15,7 +15,7 @@
           <li><%= link_to '', root_path, class: "glyphicon glyphicon-home icon", style: "font-size: 25px" %></li>
           <li><%= link_to '', about_path, class: "glyphicon glyphicon-info-sign icon", style: "font-size: 25px" %></li>
           <li><%= link_to '', new_post_path, class: "glyphicon glyphicon-plus-sign icon", style: "font-size: 25px" %></li>
-          <li><%= link_to '', customers_path, class: "glyphicon glyphicon-user icon", style: "font-size: 25px" %></li>
+          <li><%= link_to '', customer_path(current_customer), class: "glyphicon glyphicon-user icon", style: "font-size: 25px" %></li>
           <li><%= link_to '', destroy_customer_session_path, method: :delete, class: "glyphicon glyphicon-log-out icon", style: "font-size: 25px" %></li>
         <% else %>
         <!--ログインしていない場合-->

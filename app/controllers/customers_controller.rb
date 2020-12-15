@@ -1,11 +1,12 @@
 class CustomersController < ApplicationController
-  def index
-    @customer = current_customer
-    @comment = Comment.new
-  end
-
+# before_action :authenticate_customer!
+# before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
   def show
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
+    #@customer = Customer.find(params[:id])
+    @comment = Comment.new
+    @post = Post.find_by(id:params[:id])
+    @posts = current_customer.posts
   end
 
   def edit
@@ -16,6 +17,6 @@ class CustomersController < ApplicationController
 
   private
   def customer_params
-    params.require(:customer).permit(:name, :profile_image)
+    params.require(:customer).permit(:name, :user_name, :profile_image)
   end
 end

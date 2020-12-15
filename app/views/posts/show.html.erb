@@ -1,40 +1,55 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
+<div class="container">
+  <div class="row">  
+      <tr>
+        <div class="col-xs-6">
+          <td><%= attachment_image_tag(@post, :image, :size =>'390x260', fallback: "no_image.jpg") %></td>
+        </div>
+        <div class="col-xs-6">
+          <h1 class="imagenamecs"><%= @post.customer.name %></h1>
+          <br>
+          <td><%= @post.sentence %></td>
+        </div>
+      </tr>
   
-  <%#自分の投稿の詳細画面の場合に編集ページへのリンクを表示する %>
-  <% if @post.customer_id == current_customer.id %>
-      <p><%= link_to "編集", edit_post_path(@post), class: "glyphicon glyphicon-edit" %></p>
-  <% end %>
-
-  <%= form_with(model:[@post, @comment], local: true) do |f| %>
-    <div class="row">
-      <div class="col-sm-12">
-        <%= f.text_area :comment, rows:'2', class: "form-control",placeholder: "コメントを追加" %>
-      </div>
-    </div>
-    <%= f.submit "追加する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-  <% end %>
-
-　<% @post.comments.each do |comment| %>
-    <li class="comment">
-      <div class="comment-body bb">
-        <div class="comment-avatar">
-          <div class="avatar">
-            <%= image_tag('sample-author1.jpg', style: "width: 60px; height: 60px;") %>
-          </div>
+    <%#自分の投稿の詳細画面の場合に編集ページへのリンクを表示する %>
+    <%# if @post.customer_id == current_customer.id %>
+        <p><%= link_to "編集", edit_post_path(@post), class: "glyphicon glyphicon-edit" %></p>
+    <%# end %>
+  
+    <%= form_with(model:[@post, @comment], local: true) do |f| %>
+      <div class="row">
+        <div class="col-sm-12">
+          <%= f.text_area :comment, rows:'2', class: "form-control",placeholder: "コメントを追加" %>
         </div>
-        <div class="comment-text">
-          <div class="comment-author clearfix">
-            <a href="#" class="link-author"><%= comment.customer.user_name %></a>
-            <span class="comment-meta">
-              <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
-            </span>
-          </div>
-          <div class="comment-entry"><%= comment.comment %></div>
-           <% if post_comment.customer == current_customer %>
-            <div>
-              <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-danger pull-right" %>
+      </div>
+      <%= f.submit "追加する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+    <% end %>
+  
+  　<% @post.comments.each do |comment| %>
+      <li class="comment">
+        <div class="comment-body bb">
+          <div class="comment-avatar">
+            <div class="avatar">
+              <%= image_tag('sample-author1.jpg', style: "width: 60px; height: 60px;") %>
             </div>
-          <% end %>
+          </div>
+          <div class="comment-text">
+            <div class="comment-author clearfix">
+              <a href="#" class="link-author"><%= comment.customer.user_name %></a>
+              <span class="comment-meta">
+                <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
+              </span>
+            </div>
+            <div class="comment-entry"><%= comment.comment %></div>
+             <% if post_comment.customer == current_customer %>
+              <div>
+                <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-danger pull-right" %>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
-    </li>
-  <% end %>
+      </li>
+    <% end %>
+  </div>
+</div>

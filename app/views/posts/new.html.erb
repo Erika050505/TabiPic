@@ -10,17 +10,18 @@
       </br>
       <%= f.text_area :sentence, class:"form-caption", rows:"5", placeholder:"投稿文" %>
     </div>
-    <!--<div class="col-12">-->
-    <!--  <%#= f.label :area, 'エリア' %>-->
-    <!--</div>-->
-    <!--<div class="col-12">-->
-    <!--  <%#= f.select :area, options_for_select({'国内': 1, 'アジア': 2, '北アメリカ': 3, '南アメリカ': 4, 'ヨーロッパ': 5, 'アフリカ': 6, 'オセアニア': 7 }, :prompt =>'---選択してください---', class: 'form-control', required: true ) %>-->
-    <!--</div>-->
-    <!--</br>-->
-    <!--<div class="col-12">-->
-    <!--  <%#= f.label :tag_list, 'タグ' %>-->
-    <!--  <%#= f.text_field :tag_list, value: @post.tag_list.join(','), class: "form-control" %>-->
-    <!--</div>-->
+    <div class="col-12">
+      <%= f.label :area_id, 'エリア' %>
+    </div>
+    <div class="col-12">
+      <%= f.select :area_id, options_for_select({'国内': 1, 'アジア': 2, '北アメリカ': 3, '南アメリカ': 4, 'ヨーロッパ': 5, 'アフリカ': 6, 'オセアニア': 7 }, :prompt =>'---選択してください---', class: 'form-control', required: true ) %>
+    </div>
+    </br>
+    <div class="col-12">
+      <%= f.label :tag, 'タグ' %>
+      <%= f.text_field :tag, class: "form-control", :value =>@post.tags.join(',') %>
+      <%#= f.text_field :tag, value :@post.tag, class: "form-control" %>
+    </div>
     </br>
     <div class="col-12">
       <%= f.submit "投稿する" %>

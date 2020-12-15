@@ -1,18 +1,18 @@
 class PostsController < ApplicationController
   #before_action :authenticate_user!
-  #before_action :search
   def new
     @post = Post.new
   end
 
   def index
     @posts = Post.all
-    if params[:tag_name]
-      @posts = Post.tagged_with("#{params[:tag_name]}")
+    if params[:tag_id]
+      @posts = Post.tagged_with("#{params[:tag_id]}")
     end
   end
 
   def show
+    @post = Post.find(params[:id])
     @comment = Comment.new
   end
 
@@ -35,11 +35,11 @@ class PostsController < ApplicationController
 
   def destroy
   end
-  
-  
+
+
   private
 
   def post_params
-    params.require(:post).permit(:image, :caption, :area, :tag_list) 
+    params.require(:post).permit(:image, :sentence, :area_id, :tag_id)
   end
 end
