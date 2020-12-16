@@ -11,6 +11,8 @@
         <% if @customer.id == current_customer.id %>
           <p><%= link_to "プロフィール編集", edit_customer_path(@customer), class: "pull-right" %></p>
         <% end %>
+        <td>フォロー数: <%= @customer.followings.count %></td>
+        <td>フォロワー数: <%= @customer.followers.count %></td>
       </div>
     </div>
   </div>

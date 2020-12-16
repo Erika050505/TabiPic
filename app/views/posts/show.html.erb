@@ -6,8 +6,8 @@
           <td><%= attachment_image_tag(@post, :image, :size =>'390x260', fallback: "no_image.jpg") %></td>
         </div>
         <div class="col-xs-6">
-          <h1 class="imagenamecs"><%= @post.customer.name %></h1>
-          <br>
+          <h1 class="imagenamecs"><%= @post.customer.user_name %></h1>
+          <td><%#= render 'relationships/follow_botton', relationships: @relationships %></td>
           <td><%= @post.sentence %></td>
         </div>
       </tr>
