@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_15_113709) do
+ActiveRecord::Schema.define(version: 2020_12_16_125202) do
 
   create_table "areas", force: :cascade do |t|
     t.string "continent"
@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 2020_12_15_113709) do
     t.datetime "updated_at", null: false
     t.string "area_id"
     t.string "tag_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "follow_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id", "follow_id"], name: "index_relationships_on_customer_id_and_follow_id", unique: true
+    t.index ["customer_id"], name: "index_relationships_on_customer_id"
+    t.index ["follow_id"], name: "index_relationships_on_follow_id"
   end
 
   create_table "taggings", force: :cascade do |t|
