@@ -1,5 +1,5 @@
 class RelationshipsController < ApplicationController
-  before_action :set_customer
+  #before_action :set_customer
 
   def create
     following = current_customer.follow(@customer)
@@ -24,9 +24,7 @@ class RelationshipsController < ApplicationController
   end
 
   private
-  
-    def
-      @customer = Customer.find(params[:relationship][:follow_id])
-    end
-  
+  def follow
+    @customer = Customer.find(params[:relationship][:follow_id])
+  end
 end

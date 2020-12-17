@@ -6,20 +6,20 @@
     
     <%= form_with model:@post, local:true do |f| %>
     <div class="col-12">
-      <%= f.attachment_field :image %>
+      <%= attachment_image_tag @post, :image, :size =>'300x200' %>
       </br>
-      <%= f.text_area :caption, class:"form-caption", rows:"3", placeholder:"投稿文ここに" %>
+      <%= f.text_area :sentence, autofocus: true, class:"form-caption", rows:"3", placeholder:"投稿文ここに" %>
     </div>
     <div class="col-12">
       <%= f.label :area, 'エリア' %>
     </div>
     <div class="col-12">
-      <%= f.select :area, options_for_select({'国内': 1, 'アジア': 2, '北アメリカ': 3, '南アメリカ': 4, 'ヨーロッパ': 5, 'アフリカ': 6, 'オセアニア': 7 }, :prompt =>'---選択してください---', class: 'form-control', required: true ) %>
+      <%= f.select :area, options_for_select({'国内': 1, 'アジア': 2, '北アメリカ': 3, '南アメリカ': 4, 'ヨーロッパ': 5, 'アフリカ': 6, 'オセアニア': 7 }, :prompt =>'---選択してください---', class: 'form-control', required: true ), autofocus: true %>
     </div>
     </br>
     <div class="col-12">
       <%= f.label :tag_list, 'タグ' %>
-      <%= f.text_field :tag_list, value: @post.tag_list.join(','), class: "form-control" %>
+      <%= f.text_field :tag_list, value: @post.tag_list.join(','), autofocus: true, class: "form-control" %>
     </div>
     </br>
     <div class="col-12">
