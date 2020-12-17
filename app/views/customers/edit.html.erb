@@ -1,8 +1,40 @@
+  <%= form_with model:@customer, local:true do |f| %>
+
   <%#プロフィール写真の変更 %>
-  <div class="form-group has-icon">
-    <div class="customer-edit-image">
-      <%= attachment_image_tag @customer, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%>
-    </div>
-    <label class="control-label sr-only" for="inputEmail">ProfileImage</label>
-    <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
-  </div>
+        <div class="form-group has-icon">
+          <div class="customer-edit-image">
+            <%= attachment_image_tag @customer, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%>
+          </div>
+          <label class="control-label sr-only" for="inputEmail">ProfileImage</label>
+          <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+        </div>
+
+        <div class="field col-xs-12">
+          <%= f.label :"名前", class:"col-xs-2" %>
+          <%= f.text_field :name, autofocus: true, class:"col-xs-2" %><br>
+        </div>
+
+        <div class="field col-xs-12">
+          <%= f.label :"ユーザーネーム", class:"col-xs-2" %>
+          <%= f.text_field :user_name, autofocus: true , class:"col-xs-2" %>
+        </div>
+
+        <div class="field col-xs-12">
+          <%= f.label :"自己紹介" , class:"col-xs-2"%>
+          <%= f.text_area :introduction, autofocus: true, class:"form-caption", rows:"5" %>
+        </div>
+
+        <div class="field col-xs-12">
+          <%= f.label :"メール", class:"col-xs-2" %>
+          <%= f.text_field :email, autofocus: true %>
+        </div>
+
+        <div class="field col-xs-12">
+          <%= f.label :"電話番号(ハイフン無し)" , class:"col-xs-2"%>
+          <%= f.text_field :phone_number, autofocus: true %>
+        </div>
+        
+        <div class="col-xs-12">
+          <%= f.submit "編集する" %>
+        </div>
+  <% end %>

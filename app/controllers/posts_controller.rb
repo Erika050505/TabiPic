@@ -6,14 +6,16 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
-    if params[:tag_id]
-      @posts = Post.tagged_with("#{params[:tag_id]}")
+    if params[:tag_name]
+      @posts = Post.tagged_with("#{params[:tag_name]}")
     end
+  
   end
 
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
+    @customer = Customer.find(params[:id])
   end
 
   def create
@@ -34,12 +36,15 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to root_path
   end
 
 
   private
 
   def post_params
-    params.require(:post).permit(:image, :sentence, :area_id, :tag_id)
+    params.require(:post).permit(:image, :sentence, :area, :tag)
   end
 end
