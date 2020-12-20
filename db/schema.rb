@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_17_075936) do
+ActiveRecord::Schema.define(version: 2020_12_17_120935) do
 
   create_table "areas", force: :cascade do |t|
     t.string "continent"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_12_17_075936) do
     t.integer "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "comment"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -90,9 +91,10 @@ ActiveRecord::Schema.define(version: 2020_12_17_075936) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer "taggings_count", default: 0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
 end
