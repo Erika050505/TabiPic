@@ -1,68 +1,52 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
-  <div class="profile-container">
-    <div class="Title">
-        <h2>My page</h2>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <%= attachment_image_tag @customer, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
-        <%= @customer.name %>
-        <%= @customer.user_name %>
-        <% if @customer.id == current_customer.id %>
-          <p><%= link_to "プロフィール編集", edit_customer_path(@customer), class: "pull-right" %></p>
-        <% end %>
-        <td>フォロー数: <%= @customer.followings.count %></td>
-        <td>フォロワー数: <%= @customer.followers.count %></td>
-        <%= @customer.introduction %>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <% @posts.each do |post| %>
-        <div class="col-md-4">
-          <div class="masonry-block">
-            <div class="block block-image v1">
-              <%= link_to post_path(post.id) do %>
-                  <div class="block-image">
-                    <div class="view view-first">
-                      <%= attachment_image_tag post, :image, :size =>'300x200' %>
-                    </div>
-                  </div>
-                  <div class="block-content">
-                    <%= image_tag('no_image.jpg', class: "img-circle pull-left profile-thumb") %>
-                    <h3 class="block-title">
-                        <%= post.customer.name %>
-                    </h3>
-                <p><%= post.sentence %></p>
-                <ul class="inline-meta">
-                  <li>
-                    <%= post.customer.name %>
-                  </li>
-              <% end %>
-                <% if post.liked_by?(current_customer) %>
-                <li>
-                  <%= link_to post_likes_path(post), method: :delete do %>
-                    <i class="fa fa-heart",aria-hidden="true", style="color: red;"></i>
-                    <%= post.likes.count %>
-                  <% end %>
-                </li>
-                <% else %>
-                <li>
-                  <%= link_to post_likes_path(post), method: :post do %>
-                    <i class="fa fa-heart" aria-hidden="true"></i>
-                    <%= post.likes.count %>
-                  <% end %>
-                </li>
-                <% end %>
-                <li>
-                  <i class="fa fa-comment">
-                    <%= link_to "#{@customer.comments.count}", root_path %>
-                  </i>
-                </li>
+ <div class="row">
+    <div class="col-md-12">
+        <h3><%= @customer.name %>&nbsp;&nbsp;詳細</h3>
+        <div class = "profile">
+          <div class="col-sm-2">
+            <div class = "username">
+              <%= attachment_image_tag @customer, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle profile-img", fallback: "no_image.jpg" %>
+              <p><%= @customer.user_name %></p>
             </div>
           </div>
+          <div class="col-sm-10">
+            <% if current_customer != nil %> 
+              <% if @customer.id == current_customer.id %>
+                <div class = "profile-info">
+                  <p><%= link_to "プロフィール編集", edit_customer_path(@customer) %></br/>
+              <% end %>
+            <% end %>
+            <p><%= render 'relationships/follow_button', relationships: @relationships %></p>
+                フォロー数: <%= @customer.followings.count %>&nbsp;&nbsp;&nbsp;&nbsp;
+                フォロワー数: <%= @customer.followers.count %></br>
+            <p><%= @customer.introduction %></p>
+              </div>
+           </div>
         </div>
+      <% @posts.each do |post| %>
+          <div class="masonry-block">
+            <%= link_to post_path(post.id) do %>
+              <%= attachment_image_tag post, :image, :size =>'300x200' %>
+            <% end %>
+            <p><%= post.sentence %></p>
+              <div class="block-reaction">
+                    <% if post.liked_by?(current_customer) %>
+                      <%= link_to post_likes_path(post), method: :delete do %>
+                        <i class="fa fa-heart",aria-hidden="true", style="color: red;"></i>
+                        <%= post.likes.count %>
+                      <% end %>
+                    <% else %>
+                      <%= link_to post_likes_path(post), method: :post do %>
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                        <%= post.likes.count %>
+                      <% end %>
+                    <% end %>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                      <i class="fa fa-comment">
+                        <%= link_to "#{post.comments.count}", root_path %>
+                      </i>
+              </div>
+          </div>
       <% end %>   
     </div>
   </div>

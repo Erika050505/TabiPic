@@ -4,11 +4,11 @@ class CommentsController < ApplicationController
     comment = current_customer.comments.new(comment_params)
     comment.post_id = post.id
     comment.save
-    redirect_to root_path
+    redirect_to post_path(params[:post_id])
   end
 
   def destroy
-    Comment.find_by(id: params[:id], post_id: params[:post_id]).destroy
+    Comment.find_by(post_id: params[:post_id]).destroy
     redirect_to post_path(params[:post_id])
   end
   

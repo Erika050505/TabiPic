@@ -1,21 +1,25 @@
 class PostsController < ApplicationController
-  #before_action :authenticate_user!
+
   def new
     @post = Post.new
+    @areas = Area.all
   end
 
   def index
     @posts = Post.all
     if params[:tag_name]
       @posts = Post.tagged_with("#{params[:tag_name]}")
+    elsif params[:area_id]
+      @posts = Post.where(area_id: params[:area_id])
+    elsif params[:q]
+      @posts = @search.result
     end
-  
   end
 
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
-    @customer = Customer.find(params[:id])
+    @customer = Customer.find(@post.customer_id)
   end
 
   def create
@@ -27,6 +31,7 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @areas = Area.all
   end
 
   def update
@@ -45,6 +50,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:image, :sentence, :area, :tag)
+    params.require(:post).permit(:image, :sentence, :area_id, :tag_list)
   end
 end

@@ -8,7 +8,6 @@ class Post < ApplicationRecord
   def liked_by?(customer)
     likes.where(customer_id: customer.id).exists?
   end
-  
-  has_many :tags
-  has_many :areas
+
+  belongs_to :area
 end

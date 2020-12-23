@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+areas = ['国内', 'アジア', '北アメリカ', '南アメリカ', 'ヨーロッパ', 'アフリカ', 'オセアニア']
+
+#[1,2,3]
+areas.each do |value|
+  Area.create!(continent: value)
+end

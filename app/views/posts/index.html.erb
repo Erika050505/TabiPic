@@ -1,70 +1,56 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
-<div class="container">
   <div class="row">
-
- <%# 検索した投稿を表示させるとき %>
-    <%# @search_posts.each do |post| %>
-    <%# end %>
-    
- <%# tag_list.each do |tag| %>
- <!--<span class="badge badge-primary.mr-1.p-2"></span>-->
- <%# span.badge.badge-primary.mr-1.p-2 %>
-   <%#= link_to tag, root_path(tag_name: tag), class: "text-white" %>
- <%# end %>
+     <div class="col-md-1">
+      <h4>エリア</h4>
+        <div class="area">
+          <% Area.all.each do |area| %>
+              <%= link_to area.continent, posts_path(area_id: area.id) %>
+          <% end %>
+        </div>
+    </div>
       
+    <div class="col-md-11">
       <% @posts.each do |post| %>
-          <div class="col-md-4">
             <div class="masonry-block">
-              <div class="block block-image v1">
-                <div class="block-image">
-                  <div class="view view-first">
                     <%= link_to post_path(post.id) do %>
-                    <%= attachment_image_tag post, :image, :size =>'300x200' %>
-                  </div>
-                </div>
+                      <%= attachment_image_tag post, :image, :size =>'300x200' %>
+                    <% end %>
                 <div class="block-content">
-                  <%= image_tag('no_image.jpg', class: "img-circle pull-left profile-thumb") %>
+                  <%= attachment_image_tag post.customer, :profile_image, :fill, 50, 50, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
                   <h3 class="block-title">
+                    <%= link_to customer_path(post.customer_id) do %>
                       <%= post.customer.name %>
                     <% end %>
                   </h3>
                   <p><%= post.sentence %></p>
-                  <ul class="inline-meta">
-                    <li>
-                      <%= post.customer.name %>
-                    </li>
+                  <div class="block-reaction">
                   <% if customer_signed_in? %>
                     <% if post.liked_by?(current_customer) %>
-                      <li>
                         <%= link_to post_likes_path(post), method: :delete do %>
                           <i class="fa fa-heart",aria-hidden="true", style="color: red;"></i>
                           <%= post.likes.count %>
                         <% end %>
-                      </li>
                     <% else %>
-                      <li>
                         <%= link_to post_likes_path(post), method: :post do %>
                           <i class="fa fa-heart" aria-hidden="true"></i>
                           <%= post.likes.count %>
                         <% end %>
-                      </li>
                     <% end %>
                   <% else %>
                     <i class="fa fa-heart" aria-hidden="true"></i>
                     <%= post.likes.count %>
                   <% end %>
-                    <li>
                       <i class="fa fa-comment">
                       <%= link_to "#{post.comments.count}", post_path(post.id) %>
                       </i>
-                    </li>
                   
-                  </ul>
+                  </div>
+                  <% post.tag_counts_on(:tags).each do |tag| %>
+                    <%= link_to tag.name, posts_path(tag_name:tag.name) %>
+                  <% end %>
                 </div>
-              </div>
             </div>
-          </div>
       <% end %>
-    
+    </div>
   </div>
 </div>

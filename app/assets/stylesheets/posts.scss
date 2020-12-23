@@ -5,7 +5,33 @@
 
 .img-circle{
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   background-position: center center;
+}
+
+.masonry-block{
+  flex-direction: row;
+  flex-wrap: wrap;
+  display: inline-block;
+  border: 1px solid #d3d3d3;
+  margin: 5px;
+  width: 30%;
+}
+
+.area {
+  display: inline-flex;
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+  width: 80px;
+}
+
+.form-caption {
+  width: 500px;
+}
+
+.user {
+  flex-direction: row;
+  flex-wrap: nowrap;
 }

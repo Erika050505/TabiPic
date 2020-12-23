@@ -1,9 +1,10 @@
 class RelationshipsController < ApplicationController
-  #before_action :set_customer
+  before_action :authenticate_customer!
+  before_action :set_customer
 
   def create
     following = current_customer.follow(@customer)
-    if following.save
+    if following
       flash[:success] = 'ユーザーをフォローしました'
       redirect_to @customer
     else
@@ -14,7 +15,7 @@ class RelationshipsController < ApplicationController
 
   def destroy
     following = current_customer.unfollow(@customer)
-    if following.destroy
+    if following
       flash[:success] = 'ユーザーのフォローを解除しました'
       redirect_to @customer
     else
@@ -24,7 +25,7 @@ class RelationshipsController < ApplicationController
   end
 
   private
-  def follow
-    @customer = Customer.find(params[:relationship][:follow_id])
+  def set_customer
+    @customer = Customer.find(params[:customer_id])
   end
 end
