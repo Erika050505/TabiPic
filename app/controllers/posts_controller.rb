@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+before_action :authenticate_customer!, only: [:edit, :update, :destroy]
+before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
@@ -48,8 +50,14 @@ class PostsController < ApplicationController
 
 
   private
-
   def post_params
     params.require(:post).permit(:image, :sentence, :area_id, :tag_list)
+  end
+  
+  def ensure_correct_customer
+    @post = Post.find(params[:id])
+    unless @post.customer == current_customer
+    redirect_to root_path
+    end
   end
 end
