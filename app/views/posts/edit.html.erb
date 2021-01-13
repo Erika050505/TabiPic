@@ -5,26 +5,18 @@
     <br>
     
     <%= form_with model:@post, local:true do |f| %>
-    <div class="col-12">
       <%= attachment_image_tag @post, :image, :size =>'300x200' %>
       </br>
-      <%= f.text_area :sentence, autofocus: true, class:"form-caption", rows:"3", placeholder:"投稿文ここに" %>
-    </div>
-    <div class="col-12">
-      <%= f.label :area, 'エリア' %>
-    </div>
-    <div class="col-12">
-      <%= f.select :area, options_for_select({'国内': 1, 'アジア': 2, '北アメリカ': 3, '南アメリカ': 4, 'ヨーロッパ': 5, 'アフリカ': 6, 'オセアニア': 7 }, :prompt =>'---選択してください---', class: 'form-control', required: true ), autofocus: true %>
-    </div>
-    </br>
-    <div class="col-12">
+      <%= f.text_area :sentence, autofocus: true, class:"form-caption", rows:"5", placeholder:"投稿文" %>
+      </br>
+      <%= f.label :area_id, 'エリア' %>
+      </br>
+      <%= f.collection_select(:area_id, @areas, :id, :continent, include_blank: true, autofocus: true) %>
+      </br>
       <%= f.label :tag_list, 'タグ' %>
-      <%= f.text_field :tag_list, value: @post.tag_list.join(','), autofocus: true, class: "form-control" %>
-    </div>
-    </br>
-    <div class="col-12">
+      <%= f.text_field :tag_list, :value =>@post.tag_list.join(','), autofocus: true, class: "form-control" %>
+      </br>
       <%= f.submit "編集する" %>
-    </div>
     <% end %>
     
 </div>
