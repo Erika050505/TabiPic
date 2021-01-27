@@ -78,3 +78,5 @@ gem 'acts-as-taggable-on', '~> 6.0'
 group :production do
   gem 'mysql2'
 end
+
+gem 'rails-i18n'

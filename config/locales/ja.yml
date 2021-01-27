@@ -1,0 +1,27 @@
+ja:
+  activerecord:
+      models:
+        customers:
+     attributes:
+      customers:
+        name: 名前
+        user_name: ユーザーネーム
+        phone_number: 電話番号
+        email: メールアドレス
+        introduction: 自己紹介
+        
+ja:
+  activerecord:
+      models:
+        posts:
+     attributes:
+      posts:
+        area_id: エリア名
+        sentence: 投稿文
+ja:
+  activerecord:
+      models:
+        comments:
+     attributes:
+    　comments:
+    　  comment: コメント

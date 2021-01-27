@@ -7,10 +7,11 @@ class CommentsController < ApplicationController
       redirect_to post_path(params[:post_id])
     else
       render 'posts/show'
+    end
   end
 
   def destroy
-    Comment.find_by(post_id: params[:post_id]).destroy
+    Comment.find(params[:id]).destroy
     redirect_to post_path(params[:post_id])
   end
   
