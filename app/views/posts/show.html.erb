@@ -7,6 +7,16 @@
   </div>
   <div class="row">
       <div class="col-9">
+        <% if customer.errors.any? %>
+          <div class = "alert">
+            <ul>
+              <% customer.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        
         <div class="user">
           <p><%= attachment_image_tag @post.customer, :profile_image, :fill, 50, 50, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
           </p>
