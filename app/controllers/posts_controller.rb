@@ -27,12 +27,15 @@ before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
   def create
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
-    @post.save
-    tags = Vision.get_image_data(@post.image)    
-    tags.each do |tag|
-      @post.tags.create(name: tag)
+    if @post.save
+      tags = Vision.get_image_data(@post.image)    
+      tags.each do |tag|
+        @post.tags.create(name: tag)
+      end
+      redirect_to root_path
+    else
+      render 'posts/show'
     end
-    redirect_to root_path
   end
 
   def edit

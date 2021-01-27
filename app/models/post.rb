@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   acts_as_taggable
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  validates :image_id, presence: true
+  validates :sentence, presence: true
 
   def liked_by?(customer)
     likes.where(customer_id: customer.id).exists?
