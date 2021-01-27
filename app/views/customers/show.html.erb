@@ -16,7 +16,7 @@
                   <p><%= link_to "プロフィール編集", edit_customer_path(@customer) %></br/>
               <% end %>
             <% end %>
-            <p><%= render 'relationships/follow_button', relationships: @relationships %></p>
+            <p><%= render 'relationships/follow_button', customer: @customer %></p>
                 フォロー数: <%= @customer.followings.count %>&nbsp;&nbsp;&nbsp;&nbsp;
                 フォロワー数: <%= @customer.followers.count %></br>
             <p><%= @customer.introduction %></p>
