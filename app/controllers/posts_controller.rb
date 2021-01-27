@@ -12,8 +12,10 @@ before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
     if params[:tag_name]
       @posts = Post.tagged_with("#{params[:tag_name]}")
     elsif params[:area_id]
+      @area = Area.find(params[:area_id])
       @posts = Post.where(area_id: params[:area_id])
     elsif params[:q]
+      @word = params["q"]["sentence_cont"]
       @posts = @search.result
     end
   end
@@ -34,7 +36,8 @@ before_action :ensure_correct_customer, only: [:edit, :update, :destroy]
       end
       redirect_to root_path
     else
-      render 'posts/show'
+      @areas = Area.all
+      render :new
     end
   end
 

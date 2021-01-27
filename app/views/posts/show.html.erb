@@ -7,16 +7,6 @@
   </div>
   <div class="row">
       <div class="col-9">
-        <% if customer.errors.any? %>
-          <div class = "alert">
-            <ul>
-              <% customer.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-        
         <div class="user">
           <p><%= attachment_image_tag @post.customer, :profile_image, :fill, 50, 50, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
           </p>
@@ -24,7 +14,7 @@
               <h4><%= @post.customer.user_name %></h4>
           <% end %>
           
-          <p><%= render 'relationships/follow_button', relationships: @relationships %></p>
+          <p><%= render 'relationships/follow_button', customer: @post.customer %></p>
         </div>
         <%= @post.sentence %>
           <% if current_customer != nil %> 
@@ -62,6 +52,15 @@
             </div>
             <div class="block-comment">
               <% if current_customer != nil %> 
+                <% if @comment.errors.any? %>
+                  <div class = "alert">
+                    <ul>
+                      <% @comment.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
                 <%= form_with(model:[@post, @comment], local: true) do |f| %>
                       <%= f.text_area :comment, rows:'2', class: "form-control",placeholder: "コメントを追加" %></br>
                   <%= f.submit "追加する", class: "btn btn-lg btn-base-1 mt-20" %>

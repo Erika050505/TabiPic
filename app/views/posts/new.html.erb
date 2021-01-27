@@ -4,6 +4,16 @@
       <h2>新規投稿</h2>
     </div>
     <br>
+    <% if @post.errors.any? %>
+          <div class = "alert">
+            <ul>
+              <% @post.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+    <br>
     <div class="new-post">
       <%= form_with model:@post, local:true do |f| %>
       

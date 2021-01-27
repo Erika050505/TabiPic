@@ -8,7 +8,12 @@
           <% end %>
         </div>
     </div>
-      
+    <% if @area %>
+      <p><%= @area.continent %></p>
+    <% end %>
+    <% if @word %>
+      <p><%= @word %></p>
+    <% end %>
     <div class="col-md-11">
       <% @posts.each do |post| %>
             <div class="masonry-block">

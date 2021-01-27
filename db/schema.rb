@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_27_071156) do
+ActiveRecord::Schema.define(version: 2021_01_27_115610) do
 
   create_table "areas", force: :cascade do |t|
     t.string "continent"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_01_27_071156) do
     t.string "encrypted_password", default: "", null: false
     t.string "name"
     t.string "user_name"
-    t.integer "phone_number"
+    t.string "phone_number"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

@@ -13,7 +13,8 @@ class Customer < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :customer
   validates :name, presence: true
   validates :user_name, presence: true
-  validates :phone_number, presence: true
+  VALID_PHONE_NUMBER_REGEX = /\A0(\d{1}[-(]?\d{4}|\d{2}[-(]?\d{3}|\d{3}[-(]?\d{2}|\d{4}[-(]?\d{1})[-)]?\d{4}\z|\A0[5789]0[-]?\d{4}[-]?\d{4}\z/
+  validates :phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX }
   
   def follow(other_customer)
     unless self == other_customer
